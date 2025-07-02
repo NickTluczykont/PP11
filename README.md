@@ -91,9 +91,23 @@ In this exercise you will:
 #### Reflection Questions
 
 1. **How do you link `prev` and `next` pointers correctly using a static array?**
-2. **What are advantages and limitations of compile-time vs. dynamic allocation?**
-3. **How would you extend this static list to include additional data fields?**
+   Durch Adressierung mit &nodes[i - 1] und &nodes[i + 1], solange i innerhalb gültiger Bereich liegt.
 
+   Der erste Knoten hat prev = NULL, der letzte next = NULL.
+
+2. **What are advantages and limitations of compile-time vs. dynamic allocation?**
+   Vorteile: schneller und einfacher
+   Nachteile: Unflexible, nicht Erweiterbar und belegt duerhaft Speicher
+   
+4. **How would you extend this static list to include additional data fields?**
+
+   typedef struct DNode {
+    void *data;
+    struct DNode *prev;
+    struct DNode *next;
+    int id;
+    char name[32];
+} DNode;
 ---
 
 ### Task 2: Interactive Singly Linked List
@@ -156,11 +170,18 @@ In this exercise you will:
    ./solutions/slist_main
    ```
 
+
+
 #### Reflection Questions
 
+![Screenshot 2025-06-30 224841](https://github.com/user-attachments/assets/2f9e86e7-da21-4f5c-9510-52ff68f3f681)
+
 1. **Why is `malloc` necessary when adding nodes dynamically?**
+    malloc reserviert während der Laufzeit Speicher
 2. **How can you traverse the list to print each node’s address and value?**
+   Mit einer Schleife
 3. **What are the consequences of not freeing the list before exit?**
+   Der vom Programm belegte Speicher wird nicht zurückgegeben.
 
 ---
 
@@ -244,9 +265,11 @@ gcc -o solutions/json_main solutions/json_main.c solutions/json_list.o -ljansson
 #### Reflection Questions
 
 1. **How does using `getopt` make the program more flexible than `argv[1]`?**
+   Es erleichtert das Hinzufügen weiterer Optionen (-v, -o, -h usw.) und macht das Programm robuster und skalierbarer.
 2. **What happens if the user omits the `-i` option?**
+   Das Programm zeigt eine Nutzungsanleitung und beendet sich mit einem Fehlercode
 3. **How can you validate that the JSON file loaded is indeed an array?**
-
+   Mit einer if Bedigung
 ---
 
 **Remember:** Stop after **90 minutes** and record where you stopped.
